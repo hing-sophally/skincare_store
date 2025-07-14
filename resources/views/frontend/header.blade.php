@@ -60,8 +60,18 @@
                         <div class="d-flex align-items-center">
                             <img src="{{ asset('frontend/assets/img/logo.png') }}" alt="Profile"
                                 style="width: 30px; height: 30px; border-radius: 50%; margin-right: 5px;">
-                            <span style="font-weight: bold; color: #651B7A;">Hing Sophally</span>
+
+                            @if(Auth::check())
+                                <span style="font-weight: bold; color: #651B7A;">
+                                    {{ Auth::user()->first_name }} {{ Auth::user()->last_name }}
+                                </span>
+                            @else
+                                <span style="font-weight: bold; color: #651B7A;">
+                                    <a href="{{ url('/register') }}">Register / Login</a>
+                                </span>
+                            @endif
                         </div>
+
 
                     </div>
 

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\TipsController;
 use Illuminate\Support\Facades\Route;
@@ -16,3 +17,5 @@ Route::get('/about-us', function () {
 
 });
 Route::get('/tips-skincare', [TipsController::class, 'skincare'])->name('tips-skincare');
+
+Route::get('/register', [AuthController::class, 'showRegisterLoginForm'])->name('login');

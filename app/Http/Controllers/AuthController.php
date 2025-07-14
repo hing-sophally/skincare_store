@@ -142,4 +142,7 @@ public function register(Request $request)
             ], 500);
         }
     }
+    public function showRegisterLoginForm(){
+        return view('frontend.register_login_screen');
+    }
 }
