@@ -1,36 +1,34 @@
 <div class="container">
-  <h2 class="shop-title">Shop</h2>
-  
-  <div class="category-buttons">
-    <button class="btn active">All</button>
-    <button class="btn">Sun Screen</button>
-    <button class="btn">Sun Bloc</button>
-    <button class="btn">Cleanser</button>
-    <button class="btn">Toner</button>
-    <button class="btn">Lipstick</button>
-    <button class="btn">Mask</button>
-    <button class="btn">Serum</button>
-  </div>
+    <h2 class="shop-title">Shop</h2>
 
-  <div class="product-grid">
-    @for ($i = 0; $i < 12; $i++)
-    <div class="product-card">
-      <div class="product-image">
-        <img src="{{ asset('frontend/assets/img/p1.jpg') }}" alt="Product Image">
-        <span class="heart-icon">♡</span>
-      </div>
-      <div class="product-info">
-        <h3 class="product-title text-left">Mary and May</h3>
-        <h6 class="product-desc text-left">Collagen Line 3step Starter Kit</h6>
-
-        <div class="product-footer">
-          <button class="add-btn">Add to Cart</button>
-          <span class="price">$19.99</span>
-        </div>
-      </div>
+    <div class="category-buttons">
+        <button class="btn active" data-category="all">All</button>
+        @foreach($categories as $category)
+            <button class="btn" data-category="{{ $category->id }}">{{ $category->name }}</button>
+        @endforeach
     </div>
-    @endfor
-  </div>
+
+    <!-- Products Grid -->
+    <div class="products-section">
+        <div id="product-grid" class="product-grid">
+            @foreach ($products as $product)
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="{{ asset('storage/' . $product->image_url) }}" alt="Product Image" style="height: 200px">
+                        <span class="heart-icon">♡</span>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title text-left">{{ $product->name }}</h3>
+                        <h6 class="product-desc text-left">{{ $product->description }}</h6>
+                        <div class="product-footer">
+                            <button class="add-btn">Add to Cart</button>
+                            <span class="price">${{ number_format($product->price, 2) }}</span>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+    </div>
 </div>
 <style>
     .container {
@@ -168,3 +166,53 @@
 }
 
 </style>
+<!-- ✅ Add jQuery CDN if not included -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    $(document).ready(function(){
+        $('.category-buttons .btn').click(function(){
+            var categoryId = $(this).data('category');
+
+            // Update active button
+            $('.category-buttons .btn').removeClass('active');
+            $(this).addClass('active');
+
+            // AJAX request to get filtered products
+            $.ajax({
+                url: '/shop/filter/' + categoryId,
+                type: 'GET',
+                success: function(products){
+                    var html = '';
+                    if(products.length > 0){
+                        products.forEach(function(product){
+                            html += `
+              <div class="product-card">
+                <div class="product-image">
+                  <img src="/storage/${product.image_url}" alt="Product Image" style="height: 200px">
+                  <span class="heart-icon">♡</span>
+                </div>
+                <div class="product-info">
+                  <h3 class="product-title text-left">${product.name}</h3>
+                  <h6 class="product-desc text-left">${product.description}</h6>
+                  <div class="product-footer">
+                    <button class="add-btn">Add to Cart</button>
+                    <span class="price">$${parseFloat(product.price).toFixed(2)}</span>
+                  </div>
+                </div>
+              </div>
+            `;
+                        });
+                    } else {
+                        html = '<p>No products found for this category.</p>';
+                    }
+
+                    $('#product-grid').html(html);
+                },
+                error: function(){
+                    alert('Failed to load products. Please try again.');
+                }
+            });
+        });
+    });
+</script>

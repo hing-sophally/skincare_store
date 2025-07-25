@@ -28,28 +28,27 @@
       <div class="category-item">Serum</div>
       <div class="category-item">Serum</div>
     </div>
-
     <!-- Products Grid -->
-    <div class="products-section">
-      <div class="product-grid">
-        @for ($i = 0; $i < 15; $i++)
-        <div class="product-card">
-          <div class="product-image">
-            <img src="{{ asset('frontend/assets/img/p1.jpg') }}" alt="Product Image">
-            <span class="heart-icon">♡</span>
+      <div class="products-section">
+          <div class="product-grid">
+              @foreach ($products as $product)
+                  <div class="product-card">
+                      <div class="product-image">
+                          <img src="{{ asset('storage/' . $product->image_url) }}" alt="Product Image">
+                          <span class="heart-icon">♡</span>
+                      </div>
+                      <div class="product-info">
+                          <h3 class="product-title">{{ $product->name }}</h3>
+                          <h6 class="product-desc">{{ $product->description }}</h6>
+                          <div class="product-footer">
+                              <button class="add-btn">Add to Cart</button>
+                              <span class="price">${{ number_format($product->price, 2) }}</span>
+                          </div>
+                      </div>
+                  </div>
+              @endforeach
           </div>
-          <div class="product-info">
-            <h3 class="product-title">Mary and May</h3>
-            <h6 class="product-desc">Collagen Line 3step Starter Kit</h6>
-            <div class="product-footer">
-              <button class="add-btn">Add to Cart</button>
-              <span class="price">$15.99</span>
-            </div>
-          </div>
-        </div>
-        @endfor
       </div>
-    </div>
   </div>
 </div>
 @endsection
@@ -102,7 +101,7 @@
 .icon-item {
   width: 120px;
   height: 150px;
-  
+
 }
 
 .icon-item.pink {
@@ -267,15 +266,15 @@
     text-align: center;
     padding: 20px;
   }
-  
+
   .banner-content {
     margin-bottom: 20px;
   }
-  
+
   .shop-layout {
     flex-direction: column;
   }
-  
+
   .category-sidebar {
     width: 100%;
     display: flex;
@@ -283,7 +282,7 @@
     gap: 10px;
     margin-bottom: 20px;
   }
-  
+
   .category-item {
     border-radius: 20px !important;
     margin-bottom: 0;
@@ -291,7 +290,7 @@
     min-width: 100px;
     text-align: center;
   }
-  
+
   .product-grid {
     grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
     gap: 15px;

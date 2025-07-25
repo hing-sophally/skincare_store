@@ -4,14 +4,28 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\admins\ProductController;
+use App\Http\Controllers\FrontendProductController;
+use App\Http\Controllers\ShopController;
 use App\Http\Controllers\TipsController;
+use App\Models\Category;
+use App\Models\Product;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('frontend.home');
+    $products = Product::all();
+    $categories = Category::all();
+    return view('frontend.home',compact('products','categories'));
 
 });
-Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+
+
+
+
+
+
+Route::get('/products', [FrontendProductController::class, 'index'])->name('products.index');
+Route::get('/shop/filter/{categoryId}', [ShopController::class, 'filterByCategory']);
+
 
 
 Route::get('/about-us', function () {

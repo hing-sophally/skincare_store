@@ -16,7 +16,7 @@
 </head>
 <style>
     .header_area .navbar .nav .nav-item .nav-link{
-        color: rebecca#651B7A !important;
+        color: #651B7A !important;
         font-weight: bold
     }
     .footer-area{
