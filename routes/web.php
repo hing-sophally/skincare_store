@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\admins\ProductController;
 use App\Http\Controllers\FrontendProductController;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\TipsController;
 use App\Models\Category;
@@ -66,3 +67,28 @@ Route::get('/admin/product/edit/{id}', [ProductController::class, 'edit'])->name
 Route::put('/admin/product/update/{id}', [ProductController::class, 'update'])->name('admin.product.update');
 
 Route::delete('/admin/product/delete/{id}', [ProductController::class, 'destroy'])->name('admin.product.delete');
+
+
+
+//Role
+
+// List all roles
+Route::get('/admin/roles', [RoleController::class, 'index'])->name('admin.roles.index');
+
+// Show create form
+Route::get('/admin/roles/create', [RoleController::class, 'create'])->name('admin.roles.create');
+
+// Store new role
+Route::post('/admin/roles', [RoleController::class, 'store'])->name('admin.roles.store');
+
+// Show a specific role (optional if you use show page)
+Route::get('/admin/roles/{role}', [RoleController::class, 'show'])->name('admin.roles.show');
+
+// Show edit form
+Route::get('/admin/roles/{role}/edit', [RoleController::class, 'edit'])->name('admin.roles.edit');
+
+// Update role
+Route::put('/admin/roles/{role}', [RoleController::class, 'update'])->name('admin.roles.update');
+
+// Delete role
+Route::delete('/admin/roles/{role}', [RoleController::class, 'destroy'])->name('admin.roles.destroy');

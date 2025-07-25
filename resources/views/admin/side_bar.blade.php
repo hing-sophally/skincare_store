@@ -93,6 +93,32 @@
                         </ul>
                     </div>
                 </li>
+
+                {{-- Roles --}}
+                @php
+                    $rolesActive = request()->is('admin/roles*');
+                @endphp
+                <li class="nav-item {{ $rolesActive ? 'active' : '' }}">
+                    <a data-bs-toggle="collapse" href="#rolesMenu" {{ $rolesActive ? 'aria-expanded=true' : '' }}>
+                        <i class="fas fa-user-check"></i>
+                        <p>Roles</p>
+                        <span class="caret"></span>
+                    </a>
+                    <div class="collapse {{ $rolesActive ? 'show' : '' }}" id="rolesMenu">
+                        <ul class="nav nav-collapse">
+                            <li class="{{ request()->is('admin/roles') ? 'active' : '' }}">
+                                <a href="{{ url('admin/roles') }}">
+                                    <span class="sub-item">All Roles</span>
+                                </a>
+                            </li>
+                            <li class="{{ request()->is('admin/roles/create') ? 'active' : '' }}">
+                                <a href="{{ url('admin/roles/create') }}">
+                                    <span class="sub-item">Add Role</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
             </ul>
         </div>
     </div>
