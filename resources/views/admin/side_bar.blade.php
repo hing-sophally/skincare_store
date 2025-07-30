@@ -119,6 +119,32 @@
                         </ul>
                     </div>
                 </li>
+                @php
+                    $discountsActive = request()->is('admin/discounts*');
+                @endphp
+
+                <li class="nav-item {{ $discountsActive ? 'active' : '' }}">
+                    <a data-bs-toggle="collapse" href="#discountsMenu" {{ $discountsActive ? 'aria-expanded=true' : '' }}>
+                        <i class="fas fa-tags"></i>
+                        <p>Discount</p>
+                        <span class="caret"></span>
+                    </a>
+                    <div class="collapse {{ $discountsActive ? 'show' : '' }}" id="discountsMenu">
+                        <ul class="nav nav-collapse">
+                            <li class="{{ request()->is('admin/discounts') ? 'active' : '' }}">
+                                <a href="{{ url('admin/discounts') }}">
+                                    <span class="sub-item">All Discounts</span>
+                                </a>
+                            </li>
+                            <li class="{{ request()->is('admin/discounts/create') ? 'active' : '' }}">
+                                <a href="{{ url('admin/discounts/create') }}">
+                                    <span class="sub-item">Add Discount</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
             </ul>
         </div>
     </div>

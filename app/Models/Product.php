@@ -20,6 +20,12 @@ class Product extends Model
     {
         return $this->belongsTo(Category::class);
     }
+    public function discounts()
+    {
+        return $this->hasMany(Discount::class);
+    }
+
+
 
     public function getStatusLabelAttribute()
     {

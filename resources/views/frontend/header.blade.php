@@ -52,9 +52,10 @@
                         <!-- Cart icon -->
                         <a href="#" class="nav-link position-relative">
                             <i class="fas fa-shopping-cart" style="color: #651B7A"></i>
-                            <span class="badge badge-danger"
-                                style="position: absolute; top: 0; right: 0; font-size: 10px;">0</span>
+                            <span id="cart-count" class="badge badge-danger"
+                                  style="position: absolute; top: 0; right: 0; font-size: 10px;">0</span>
                         </a>
+
 
                         <!-- Profile -->
                         <div class="d-flex align-items-center">
@@ -119,3 +120,4 @@
 }
 
 </style>
+

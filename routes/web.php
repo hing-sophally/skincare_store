@@ -1,9 +1,9 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\admins\ProductController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoriesController;
-use App\Http\Controllers\admins\ProductController;
 use App\Http\Controllers\FrontendProductController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\ShopController;
@@ -92,3 +92,18 @@ Route::put('/admin/roles/{role}', [RoleController::class, 'update'])->name('admi
 
 // Delete role
 Route::delete('/admin/roles/{role}', [RoleController::class, 'destroy'])->name('admin.roles.destroy');
+
+
+
+Route::resource('admin/discounts', \App\Http\Controllers\admins\DiscountController::class);
+
+
+
+
+
+
+
+
+
+
+
