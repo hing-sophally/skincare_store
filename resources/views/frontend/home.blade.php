@@ -6,7 +6,7 @@
 
 <!-- Banner Section -->
 <div class="container" style="background-color: #f3e5f5; border-radius: 12px; padding: 40px; display: flex; align-items: center; justify-content: space-between; height: 300px; margin-bottom: 20px;">
-    
+
     <!-- Left Text Section -->
     <div style="flex: 1;">
         <p style="font-size: 16px; color: #651B7A; margin: 0; font-weight: 600;">Care your skin with</p>
@@ -15,9 +15,12 @@
     </div>
 
     <!-- Right Image Section -->
-    <div style="">
+    <div class="d-none d-lg-block" style="">
         <img src="{{asset('frontend/assets/img/banner.png')}}" alt="Skin Care Step 1" >
-        
+
+    </div>
+    <div class="d-block d-lg-none" >
+        <img src="{{asset('frontend/assets/img/banner-small.png')}}" alt="Skin Care Step 1"  style="width: 200px">
     </div>
 
 </div>

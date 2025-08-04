@@ -1,13 +1,15 @@
-<header class="container header_area" style="
-    background-color: #edccf7;
-     border-radius: 12px;
-      padding: 0 20px;
-       margin-top: 20px;
-        margin-bottom: 20px;
-        height: 60px;
-    justify-content: center;
-    align-items: center;
-    display: flex;">
+<header class="container header_area"
+        style="
+                background-color: #edccf7;
+                border-radius: 12px;
+                padding: 0 20px;
+                margin-top: 20px;
+                margin-bottom: 20px;
+                height: 60px;
+                justify-content: center;
+                align-items: center;
+                display: flex;"
+>
     <div class="container">
         <nav class="navbar navbar-expand-lg navbar-light w-100">
 

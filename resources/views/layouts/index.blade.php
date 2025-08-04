@@ -172,21 +172,27 @@
         <!-- Items -->
         <div id="cart-items-list"></div>
 
-        <!-- Coupon Input -->
-        <div class="coupon-section mt-3">
-            <input type="text" id="coupon-code" placeholder="Enter coupon code" class="form-control" />
-            <button id="apply-discount" class="btn btn-primary mt-2 w-100">Apply Coupon</button>
-            <div id="coupon-message" class="text-danger mt-1" style="font-size: 14px;"></div>
-        </div>
-
         <!-- Totals -->
-        <div class="mt-4" style="font-size: 14px;">
-            <p>Subtotal: <span id="subtotal">$0.00</span></p>
-            <p>Discount: <span id="discount">$0.00</span></p>
-            <h4>Total: <span id="total">$0.00</span></h4>
+        <div class="mt-4 p-3 border rounded" style="font-size: 14px; background-color: #f9f9f9;">
+            <p class="mb-2 d-flex justify-content-between">
+                <span>Subtotal:</span>
+                <span id="subtotal" class="fw-semibold text-dark">$0.00</span>
+            </p>
+            <p class="mb-2 d-flex justify-content-between">
+                <span>Discount:</span>
+                <span id="discount" class="fw-semibold text-success">-$0.00</span>
+            </p>
+            <hr class="my-2">
+            <h5 class="d-flex justify-content-between">
+                <span>Total:</span>
+                <span id="total" class="fw-bold text-primary">$0.00</span>
+            </h5>
 
-            <button class="btn btn-warning w-100 mt-2" style="font-weight: bold;">Checkout</button>
+            <a href="{{ route('checkout') }}" class="btn btn-warning w-100 mt-3 fw-bold">
+                Proceed to Checkout
+            </a>
         </div>
+
     </div>
 
 

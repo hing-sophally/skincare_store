@@ -7,6 +7,7 @@ use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\FrontendProductController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\ShopController;
+use App\Http\Controllers\SkincareTipController;
 use App\Http\Controllers\TipsController;
 use App\Models\Category;
 use App\Models\Product;
@@ -99,10 +100,35 @@ Route::resource('admin/discounts', \App\Http\Controllers\admins\DiscountControll
 
 
 
+//Checkout
+Route::get('/checkout', [App\Http\Controllers\CheckoutController::class, 'index'])->name('checkout');
+Route::get('/payment/success', function () {
+    return view('frontend.payment-success');
+})->name('payment.success');
 
 
 
 
+// List all tips
+Route::get('/admin/skincare-tip', [SkincareTipController::class, 'index'])->name('admin.skincaretips.index');
+
+// Show form to create a new tip
+Route::get('/admin/skincare-tip/create', [SkincareTipController::class, 'create'])->name('admin.skincaretips.create');
+
+// Store the new tip
+Route::post('/admin/skincare-tip', [SkincareTipController::class, 'store'])->name('admin.skincaretips.store');
+
+// Show a single tip (optional)
+Route::get('/admin/skincare-tip/{id}', [SkincareTipController::class, 'show'])->name('admin.skincaretips.show');
+
+// Show form to edit a tip
+Route::get('/admin/skincare-tip/{id}/edit', [SkincareTipController::class, 'edit'])->name('admin.skincaretips.edit');
+
+// Update the tip
+Route::put('/admin/skincare-tip/{id}', [SkincareTipController::class, 'update'])->name('admin.skincaretips.update');
+
+// Delete the tip
+Route::delete('/admin/skincare-tip/{id}', [SkincareTipController::class, 'destroy'])->name('admin.skincaretips.destroy');
 
 
 

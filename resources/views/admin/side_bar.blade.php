@@ -119,31 +119,56 @@
                         </ul>
                     </div>
                 </li>
-                @php
-                    $discountsActive = request()->is('admin/discounts*');
-                @endphp
 
-                <li class="nav-item {{ $discountsActive ? 'active' : '' }}">
-                    <a data-bs-toggle="collapse" href="#discountsMenu" {{ $discountsActive ? 'aria-expanded=true' : '' }}>
-                        <i class="fas fa-tags"></i>
-                        <p>Discount</p>
+                @php
+                    $rolesActive = request()->is('admin/skincare-tip*');
+                @endphp
+                <li class="nav-item {{ $rolesActive ? 'active' : '' }}">
+                    <a data-bs-toggle="collapse" href="#rolesMenu" {{ $rolesActive ? 'aria-expanded=true' : '' }}>
+                        <i class="fas fa-user-check"></i>
+                        <p>Skincare Tips </p>
                         <span class="caret"></span>
                     </a>
-                    <div class="collapse {{ $discountsActive ? 'show' : '' }}" id="discountsMenu">
+                    <div class="collapse {{ $rolesActive ? 'show' : '' }}" id="rolesMenu">
                         <ul class="nav nav-collapse">
-                            <li class="{{ request()->is('admin/discounts') ? 'active' : '' }}">
-                                <a href="{{ url('admin/discounts') }}">
-                                    <span class="sub-item">All Discounts</span>
+                            <li class="{{ request()->is('admin/skincare-tip') ? 'active' : '' }}">
+                                <a href="{{ url('admin/skincare-tip') }}">
+                                    <span class="sub-item">All skincare tip</span>
                                 </a>
                             </li>
-                            <li class="{{ request()->is('admin/discounts/create') ? 'active' : '' }}">
-                                <a href="{{ url('admin/discounts/create') }}">
-                                    <span class="sub-item">Add Discount</span>
+                            <li class="{{ request()->is('admin/skincare-tip/create') ? 'active' : '' }}">
+                                <a href="{{ url('admin/skincare-tip/create') }}">
+                                    <span class="sub-item">Add skincare tip</span>
                                 </a>
                             </li>
                         </ul>
                     </div>
                 </li>
+{{--                @php--}}
+{{--                    $discountsActive = request()->is('admin/discounts*');--}}
+{{--                @endphp--}}
+
+{{--                <li class="nav-item {{ $discountsActive ? 'active' : '' }}">--}}
+{{--                    <a data-bs-toggle="collapse" href="#discountsMenu" {{ $discountsActive ? 'aria-expanded=true' : '' }}>--}}
+{{--                        <i class="fas fa-tags"></i>--}}
+{{--                        <p>Discount</p>--}}
+{{--                        <span class="caret"></span>--}}
+{{--                    </a>--}}
+{{--                    <div class="collapse {{ $discountsActive ? 'show' : '' }}" id="discountsMenu">--}}
+{{--                        <ul class="nav nav-collapse">--}}
+{{--                            <li class="{{ request()->is('admin/discounts') ? 'active' : '' }}">--}}
+{{--                                <a href="{{ url('admin/discounts') }}">--}}
+{{--                                    <span class="sub-item">All Discounts</span>--}}
+{{--                                </a>--}}
+{{--                            </li>--}}
+{{--                            <li class="{{ request()->is('admin/discounts/create') ? 'active' : '' }}">--}}
+{{--                                <a href="{{ url('admin/discounts/create') }}">--}}
+{{--                                    <span class="sub-item">Add Discount</span>--}}
+{{--                                </a>--}}
+{{--                            </li>--}}
+{{--                        </ul>--}}
+{{--                    </div>--}}
+{{--                </li>--}}
 
             </ul>
         </div>
