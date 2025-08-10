@@ -11,6 +11,8 @@ use App\Http\Controllers\SkincareTipController;
 use App\Http\Controllers\TipsController;
 use App\Models\Category;
 use App\Models\Product;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -37,8 +39,10 @@ Route::get('/about-us', function () {
 Route::get('/tips-skincare', [TipsController::class, 'skincare'])->name('tips-skincare');
 
 Route::get('/register', [AuthController::class, 'showRegisterLoginForm'])->name('login');
-Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
-
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+    return Auth::user();
+});
+Route::middleware('auth:sanctum')->get('/logout', [AuthController::class, 'logout']);
 // Admin Route
 Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.index');
 

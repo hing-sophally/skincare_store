@@ -57,23 +57,27 @@
                             <span id="cart-count" class="badge badge-danger"
                                   style="position: absolute; top: 0; right: 0; font-size: 10px;">0</span>
                         </a>
-
-
-                        <!-- Profile -->
-                        <div class="d-flex align-items-center">
-                            <img src="{{ asset('frontend/assets/img/logo.png') }}" alt="Profile"
-                                style="width: 30px; height: 30px; border-radius: 50%; margin-right: 5px;">
-
-                            @if(Auth::check())
-                                <span style="font-weight: bold; color: #651B7A;">
-                                    {{ Auth::user()->first_name }} {{ Auth::user()->last_name }}
+                        <nav id="navbar" class="navbar">
+                            <div class="d-flex align-items-center">
+                                <img src="{{ asset('frontend/assets/img/logo.png') }}" alt="Profile"
+                                     style="width: 30px; height: 30px; border-radius: 50%; margin-right: 5px;">
+                                <div v-if="user" class="dropdown">
+                                <span class="dropdown-toggle" style="font-weight: bold; color: #651B7A; cursor: pointer;"
+                                      data-bs-toggle="dropdown" aria-expanded="false">
+                                    @{{ user.first_name }} @{{ user.last_name }}
                                 </span>
-                            @else
-                                <span style="font-weight: bold; color: #651B7A;">
-                                    <a href="{{ url('/register') }}">Register / Login</a>
-                                </span>
-                            @endif
-                        </div>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="/profile">Profile</a></li>
+                                    <li v-if="user.is_admin"><a class="dropdown-item" href="/dashboard">Dashboard</a></li>
+                                    <li><a class="dropdown-item" href="/logout">Logout</a></li>
+                                </ul>
+                            </div>
+                            <span v-else style="font-weight: bold; color: #651B7A;">
+                                <a href="/register">Register / Login</a>
+                            </span>
+                            </div>
+                        </nav>
+
 
 
                     </div>
@@ -84,6 +88,10 @@
         </nav>
     </div>
 </header>
+<!-- Include Bootstrap CSS and JS for dropdown functionality -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
 <style>
     .header_area .navbar .nav .nav-item:hover .nav-link, .header_area .navbar .nav .nav-item.active .nav-link{
         color: #410053 ;
@@ -122,4 +130,36 @@
 }
 
 </style>
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 
+<script>
+    const { createApp } = Vue;
+
+    createApp({
+        data() {
+            return {
+                user: JSON.parse(localStorage.getItem('user')) || null,
+            };
+        },
+        mounted() {
+            // Verify token with backend
+            if (localStorage.getItem('token')) {
+                axios.get('/api/user', {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem('token')}`,
+                    },
+                })
+                    .then(res => {
+                        this.user = res.data;
+                        localStorage.setItem('user', JSON.stringify(res.data));
+                    })
+                    .catch(err => {
+                        console.error('Token verification failed:', err);
+                        localStorage.removeItem('user');
+                        localStorage.removeItem('token');
+                        this.user = null;
+                    });
+            }
+        },
+    }).mount('#navbar');
+</script>

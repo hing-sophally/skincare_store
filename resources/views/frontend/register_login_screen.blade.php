@@ -220,43 +220,44 @@ createApp({
     }
   },
   methods: {
-    handleSubmit() {
-      if (!this.isLogin) {
-        // Registration
-        if (!this.registerForm.terms_and_conditions) {
-          this.message = "You must accept the terms & conditions.";
-          this.messageColor = "red";
-          return;
-        }
-        axios.post('/api/auth/register', this.registerForm)
-          .then(res => {
-            this.message = "Registration successful!";
-            this.messageColor = "green";
-            console.log(res.data);
-                localStorage.setItem('user', JSON.stringify(res.data.user));
-                console.log("aaaaaaaaaaaaaaaaaaaaaaaaaa" ,localStorage.setItem('user', JSON.stringify(res.data.user)))
-            window.location.href ="/"
-
-          })
-          .catch(err => {
-            this.message = err.response?.data?.message || "Registration failed.";
-            this.messageColor = "red";
-          });
-      } else {
-        // Login
-        axios.post('/api/auth/login', this.loginForm)
-          .then(res => {
-            this.message = "Login successful!";
-            this.messageColor = "green";
-            console.log(res.data);
-            window.location.href ="/"
-          })
-          .catch(err => {
-            this.message = err.response?.data?.message || "Login failed.";
-            this.messageColor = "red";
-          });
+      // In your <script> section
+      // In your <script> section
+      handleSubmit() {
+          if (!this.isLogin) {
+              // Registration
+              if (!this.registerForm.terms_and_conditions) {
+                  this.message = "You must accept the terms & conditions.";
+                  this.messageColor = "red";
+                  return;
+              }
+              axios.post('/api/auth/register', this.registerForm)
+                  .then(res => {
+                      this.message = "Registration successful!";
+                      this.messageColor = "green";
+                      localStorage.setItem('user', JSON.stringify(res.data.user));
+                      localStorage.setItem('token', res.data.token); // Store the token
+                      window.location.href = "/";
+                  })
+                  .catch(err => {
+                      this.message = err.response?.data?.message || "Registration failed.";
+                      this.messageColor = "red";
+                  });
+          } else {
+              // Login
+              axios.post('/api/auth/login', this.loginForm)
+                  .then(res => {
+                      this.message = "Login successful!";
+                      this.messageColor = "green";
+                      localStorage.setItem('user', JSON.stringify(res.data.user));
+                      localStorage.setItem('token', res.data.token); // Store the token
+                      window.location.href = "/";
+                  })
+                  .catch(err => {
+                      this.message = err.response?.data?.message || "Login failed.";
+                      this.messageColor = "red";
+                  });
+          }
       }
-    }
   }
 }).mount('#app')
 </script>

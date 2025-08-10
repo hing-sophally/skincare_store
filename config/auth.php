@@ -41,7 +41,7 @@ return [
             'provider' => 'users',
         ],
         'api' => [
-            'driver' => 'jwt',
+            'driver' => 'sanctum', // Use Sanctum for API authentication
             'provider' => 'users',
         ],
     ],
